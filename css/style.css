@@ -16,7 +16,6 @@
 body {
   font-family: "Ubuntu", serif;
   background-color: #f9f9f9;
-
 }
 .agu-display {
   font-family: "Agu Display", serif;
@@ -32,13 +31,14 @@ ul {
   list-style: none;
 }
 .container {
-  width: 100%;
+  width: 90%; /* Adjusted for responsiveness */
+  max-width: 1200px; /* Max width for larger screens */
+  margin: 0 auto; /* Center the container */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-
 }
 .heading {
   width: 100%;
@@ -86,12 +86,15 @@ header {
   background-color: #fff;
   width: 100%;
   z-index: 1000;
+  position: sticky; /* Make header sticky */
+  top: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
+  padding: 15px 30px; /* Adjusted padding */
 }
 header nav .logo {
   display: flex;
@@ -111,7 +114,6 @@ header nav .links ul {
   justify-content: center;
   align-items: center;
   gap: 25px;
-  /* padding-right: 30px; */
 }
 header nav .links ul a {
   color: var(--second-color);
@@ -138,24 +140,129 @@ header nav .link a:hover {
   color: #fff;
   background-color: var(--main-color);
 }
+
+/* Burger Menu Icon */
+.burger-menu-icon {
+  display: none; /* Hidden by default, shown on smaller screens */
+  font-size: 28px;
+  color: var(--main-color);
+  cursor: pointer;
+  z-index: 1001; /* Ensure it's above other content */
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu-content {
+  background-color: #fff;
+  width: 80%; /* Adjust width for mobile menu */
+  max-width: 400px; /* Max width for the menu content */
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform: translateY(-20px); /* Initial slight offset */
+  opacity: 0;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.mobile-menu-overlay.active .mobile-menu-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu-content .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  color: var(--bold-colors);
+  cursor: pointer;
+}
+
+.mobile-menu-content .mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.mobile-menu-content .mobile-links a {
+  color: var(--main-color);
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.mobile-menu-content .mobile-links a:hover {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.mobile-menu-content .mobile-sign-in a {
+  color: var(--main-color);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.mobile-menu-content .mobile-sign-in a:hover {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
 /* End header And Navbar */
 
 /* Start Landing Page And Home Page Stats  */
 .landing {
   margin-top: 20px;
+  padding: 20px; /* Added padding for smaller screens */
 }
 .landing .content {
   width: 100%;
   display: flex;
+  flex-direction: row; /* Default for larger screens */
   align-items: center;
   justify-content: space-between;
   padding: 0px 20px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 .landing .content .text {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  flex: 1; /* Allow text to take available space */
+  min-width: 300px; /* Minimum width before wrapping */
 }
 .landing .content .text h1 {
   font-size: 50px;
@@ -183,6 +290,7 @@ header nav .link a:hover {
   gap: 60px;
   margin-left: -7px;
   margin-bottom: 10px;
+  flex-wrap: wrap; /* Allow buttons to wrap */
 }
 .landing .content .text .btns :nth-child(1) {
   background-color: var(--main-color);
@@ -209,6 +317,7 @@ header nav .link a:hover {
   gap: 70px;
   margin-bottom: 80px;
   margin-left: 38px;
+  flex-wrap: wrap; /* Allow stats to wrap */
 }
 .landing .content .text .stats .stat {
   display: flex;
@@ -238,7 +347,9 @@ header nav .link a:hover {
   position: relative;
   margin-right: -20px;
   overflow: visible;
-
+  flex-shrink: 0; /* Prevent image from shrinking too much */
+  max-width: 100%; /* Ensure image doesn't overflow */
+  height: auto; /* Maintain aspect ratio */
 }
 .landing .content .img .unique {
   position: absolute;
@@ -261,7 +372,9 @@ header nav .link a:hover {
   width: 100px;
 }
 .landing .content img {
-  width: 450px;
+  width: 100%; /* Make image fluid */
+  height: auto;
+  max-width: 450px; /* Original max width */
 }
 /* End Landing Page And Home Page Stats  */
 
@@ -274,23 +387,17 @@ header nav .link a:hover {
   width: 100%;
   padding: 20px;
 }
-.courses .cards .row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-}
 .courses .cards {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-wrap: wrap; /* Allow cards to wrap */
   gap: 30px;
 }
 .courses .cards .card {
-  width: 50%;
+  width: 48%; /* Adjusted for two columns on larger screens */
+  min-width: 300px; /* Minimum width before stacking */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -346,6 +453,8 @@ header nav .link a:hover {
 .courses .cards .card .img img {
   width: 200px;
   border-radius: 10px;
+  max-width: 100%; /* Ensure image is responsive */
+  height: auto;
 }
 /* End Courses Section */
 
@@ -353,7 +462,6 @@ header nav .link a:hover {
 .reviews {
   width: 100%;
   padding: 20px;
-  /* background-color: #fff; */
   position: relative;
 }
 .reviews .d1 ,
@@ -380,19 +488,12 @@ header nav .link a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 40px;
-}
-.reviews .content .cards .up,
-.reviews .content .cards .down {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap; /* Allow cards to wrap */
   gap: 40px;
 }
 .reviews .content .cards .card {
-  width: 30%;
+  width: 30%; /* Adjusted for three columns on larger screens */
+  min-width: 280px; /* Minimum width before stacking */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -477,18 +578,12 @@ header nav .link a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-wrap: wrap; /* Allow cards to wrap */
   gap: 20px;
 }
-.features .content .cards .row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
 .features .content .cards .card {
-  width: 25%;
+  width: 18%; /* Adjusted for 5 columns on larger screens */
+  min-width: 150px; /* Minimum width before stacking */
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -572,10 +667,12 @@ header nav .link a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap; /* Allow cards to wrap */
   gap: 20px;
 }
 .tranding .content .cards .card {
-  width: 33%;
+  width: 31%; /* Adjusted for three columns on larger screens */
+  min-width: 300px; /* Minimum width before stacking */
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -589,6 +686,7 @@ header nav .link a:hover {
 .tranding .content .cards .card .img img {
   width: 100%;
   border-radius: 10px;
+  height: auto;
 }
 .tranding .content .cards .card .text {
   width: 100%;
@@ -606,12 +704,12 @@ header nav .link a:hover {
 }
 .tranding .content .cards .card .review h4 {
   font-size: 15px;
-  color: var(--bold-colors);
+  color: #fff; /* Changed to white for better contrast on dark background */
   font-weight: 700;
   line-height: 1.4;
   padding: 2px 8px;
   border-radius: 5px;
-  background-color: #23194257;
+  background-color: var(--bold-colors); /* Used the variable for consistency */
 }
 .tranding .content .cards .card .review .stars {
   display: flex;
@@ -651,6 +749,9 @@ header nav .link a:hover {
 }
 .tranding .content .cards .card .user img {
   width: 40px;
+  height: 40px; /* Ensure consistent height */
+  border-radius: 50%; /* Make it circular */
+  object-fit: cover; /* Cover the area */
 }
 .tranding .content .cards .card .user h3 {
   font-size: 16px;
@@ -682,13 +783,13 @@ header nav .link a:hover {
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 5px;
-  background-color: #4b5e98;
+  background-color: var(--main-color);
   transition: 1s;
 }
 .tranding .content .cards .card .price a:hover {
   background-color: #49b749;
 }
-/* Start Tranding Section  */
+/* End Tranding Section  */
 
 /* Start Global Section */
 .global {
@@ -710,6 +811,8 @@ header nav .link a:hover {
 }
 .global .content img {
   width: 100%;
+  height: auto; /* Ensure image is responsive */
+  max-width: 800px; /* Optional: limit max size */
 }
 /* End Global Section */
 
@@ -737,7 +840,9 @@ header nav .link a:hover {
   gap: 20px;
   background-image: url("../sources/images/other/background.jpg");
   background-size: cover;
+  background-position: center; /* Center background image */
   z-index: 1;
+  text-align: center; /* Center text for smaller screens */
 }
 .search .content .box::after {
   content: "";
@@ -755,11 +860,13 @@ header nav .link a:hover {
   color: #fff;
   font-weight: 700;
   text-align: center;
-  max-width: 40%;
+  max-width: 60%; /* Adjusted max-width for responsiveness */
   margin-bottom: 20px;
 }
 .search .content .box .searcher {
   position: relative;
+  width: 80%; /* Make searcher responsive */
+  max-width: 400px; /* Max width for search input */
 }
 .search .content .box .searcher i {
   position: absolute;
@@ -774,7 +881,7 @@ header nav .link a:hover {
   cursor: pointer;
 }
 .search .content .box .searcher input {
-  width: 300px;
+  width: 100%; /* Make input fill its container */
   height: 40px;
   border: none;
   outline: none;
@@ -805,12 +912,13 @@ footer .connect {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 20px; /* Gap when wrapping */
 }
 footer hr {
   width: 100%;
   border: 1px solid #ffffff60;
   margin: 50px 0px;
-  /* border-radius: 50%; */
 }
 footer .connect h3 {
   font-size: 30px;
@@ -835,6 +943,8 @@ footer .columns {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap; /* Allow columns to wrap */
+  gap: 30px; /* Gap between columns when wrapped */
 }
 footer .columns .column-sp {
   display: flex;
@@ -842,6 +952,8 @@ footer .columns .column-sp {
   justify-content: center;
   flex-direction: column;
   max-width: 25%;
+  min-width: 250px; /* Minimum width for the special column */
+  flex-grow: 1; /* Allow it to grow */
 }
 footer .columns .column-sp .logo {
   display: flex;
@@ -883,13 +995,15 @@ footer .columns .column-sp .form a {
   margin-right: 5px;
 }
 footer .columns .column-sp .form a:hover {
-  background-color: #4b5e98;
+  background-color: var(--main-color);
 }
 footer .columns .column {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  flex-grow: 1; /* Allow columns to grow */
+  min-width: 180px; /* Minimum width for other columns */
 }
 footer .columns .column h5 {
   font-size: 18px;
@@ -912,10 +1026,317 @@ footer .copy {
   align-items: flex-start;
   justify-content: flex-start;
   color: #ffffff;
-  /* font-weight: 700; */
+  padding-bottom: 20px; /* Added padding */
 }
 footer .copy span {
-  color: #4b5e98;
+  color: var(--main-color);
   font-weight: 500;
 }
 /* End Footer Section */
+
+/* Media Queries for Responsiveness */
+
+/* Tablet and smaller screens (max-width: 768px) */
+@media (max-width: 768px) {
+  header nav .links,
+  header nav .btn {
+    display: none; /* Hide desktop navigation */
+  }
+
+  .burger-menu-icon {
+    display: block; /* Show burger icon */
+  }
+
+  .landing .content {
+    flex-direction: column; /* Stack elements */
+    text-align: center;
+  }
+
+  .landing .content .text {
+    align-items: center; /* Center text content */
+  }
+
+  .landing .content .text h1 {
+    font-size: 40px;
+    max-width: 90%;
+  }
+
+  .landing .content .text p {
+    font-size: 18px;
+    max-width: 90%;
+    margin-bottom: 40px;
+  }
+
+  .landing .content .text .btns {
+    flex-direction: column; /* Stack buttons */
+    gap: 20px;
+    margin-left: 0;
+    width: 100%;
+  }
+  .landing .content .text .btns a {
+    width: 80%; /* Make buttons wider */
+    max-width: 300px;
+  }
+
+  .landing .content .text .stats {
+    flex-direction: column; /* Stack stats */
+    gap: 30px;
+    margin-bottom: 40px;
+    margin-left: 0;
+  }
+  .landing .content .text .stats .hr {
+    display: none; /* Hide separator */
+  }
+
+  .landing .content .img {
+    width: 80%; /* Adjust image size */
+    max-width: 350px;
+    margin-right: 0;
+    margin-top: 40px;
+  }
+  .landing .content .img .unique,
+  .landing .content .img .uniquetwo {
+    width: 80px; /* Smaller decorative images */
+  }
+  .landing .content .img .unique {
+    top: -40px;
+    left: -30px;
+  }
+  .landing .content .img .uniquetwo {
+    bottom: 0px;
+    right: 20px;
+  }
+
+  .courses .cards .card,
+  .reviews .content .cards .card,
+  .tranding .content .cards .card {
+    width: 90%; /* Make cards full width on smaller screens */
+    flex-direction: column; /* Stack content inside cards */
+    align-items: center;
+    text-align: center;
+  }
+  .courses .cards .card .img {
+    margin-bottom: 20px; /* Add space below image */
+  }
+  .courses .cards .card .text {
+    align-items: center; /* Center text in course cards */
+  }
+
+  .reviews .d1, .reviews .d2 {
+    display: none; /* Hide decorative images on smaller screens */
+  }
+
+  .features .content .cards .card {
+    width: 45%; /* Two columns for features */
+    min-width: unset; /* Remove min-width to allow more flexibility */
+    justify-content: center;
+    text-align: center;
+    flex-direction: column; /* Stack icon and text */
+    gap: 10px;
+  }
+  .features .content .cards .card .icon {
+    margin-right: 0; /* Remove margin */
+    margin-bottom: 10px; /* Add margin below icon */
+  }
+
+  .search .content .box h3 {
+    font-size: 24px;
+    max-width: 80%;
+  }
+  .search .content .box .searcher input {
+    width: 90%;
+  }
+
+  footer .connect {
+    flex-direction: column; /* Stack connect elements */
+    text-align: center;
+  }
+  footer .connect .icons {
+    margin-top: 20px;
+  }
+
+  footer .columns {
+    flex-direction: column; /* Stack footer columns */
+    align-items: center;
+    text-align: center;
+  }
+  footer .columns .column-sp,
+  footer .columns .column {
+    max-width: 90%; /* Make columns wider */
+    min-width: unset; /* Remove min-width */
+    align-items: center;
+  }
+  footer .columns .column-sp .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  footer .columns .column-sp .form input {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  footer .columns .column-sp .form a {
+    width: 80%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  footer .columns .column h5 {
+    margin-bottom: 15px;
+  }
+  footer .columns .column a {
+    margin-bottom: 8px;
+  }
+  footer .copy {
+    justify-content: center; /* Center copyright */
+    text-align: center;
+  }
+}
+
+/* Mobile phones (max-width: 480px) */
+@media (max-width: 480px) {
+  header nav {
+    padding: 10px 20px;
+  }
+  header nav .logo h2 {
+    font-size: 28px;
+  }
+  header nav .logo img {
+    width: 50px;
+  }
+  .burger-menu-icon {
+    font-size: 24px;
+  }
+
+  .special-heading {
+    font-size: 24px;
+    padding: 12px 20px;
+    margin: 60px 0;
+  }
+
+  .landing .content .text h1 {
+    font-size: 32px;
+  }
+  .landing .content .text p {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  .landing .content .text .btns a {
+    font-size: 20px;
+    padding: 12px 20px;
+  }
+  .landing .content .text .stats .stat h5 {
+    font-size: 20px;
+  }
+  .landing .content .text .stats .stat span {
+    font-size: 16px;
+  }
+
+  .courses .cards .card,
+  .reviews .content .cards .card,
+  .tranding .content .cards .card {
+    width: 100%; /* Full width for all cards */
+    padding: 15px;
+  }
+  .courses .cards .card .text h4 {
+    font-size: 18px;
+  }
+  .courses .cards .card .text p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .courses .cards .card .text .btn a {
+    font-size: 16px;
+    padding: 8px 15px;
+  }
+  .courses .cards .card .img img {
+    width: 150px; /* Smaller image in course cards */
+  }
+
+  .reviews .content .cards .card .upper img {
+    width: 50px;
+  }
+  .reviews .content .cards .card .upper h4 {
+    font-size: 18px;
+  }
+  .reviews .content .cards .card .upper h6 {
+    font-size: 12px;
+  }
+  .reviews .content .cards .card .upper .icon i {
+    font-size: 30px;
+  }
+  .reviews .content .cards .card .lower p {
+    font-size: 16px;
+  }
+
+  .features .content .cards .card {
+    width: 90%; /* Single column for features */
+    flex-direction: row; /* Back to row layout for icon and text */
+    justify-content: flex-start;
+    text-align: left;
+    gap: 15px;
+  }
+  .features .content .cards .card .icon {
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+  .features .content .cards .card h5 {
+    font-size: 18px;
+  }
+
+  .tranding .content .cards .card .text h5 {
+    font-size: 20px;
+  }
+  .tranding .content .cards .card .user img {
+    width: 35px;
+    height: 35px;
+  }
+  .tranding .content .cards .card .price h6 {
+    font-size: 16px;
+    padding: 8px;
+  }
+  .tranding .content .cards .card .price a {
+    font-size: 16px;
+    padding: 8px 15px;
+  }
+
+  .search .content .box h3 {
+    font-size: 20px;
+    max-width: 90%;
+  }
+  .search .content .box .searcher input {
+    height: 35px;
+    font-size: 14px;
+  }
+  .search .content .box .searcher i {
+    font-size: 14px;
+    right: 15px;
+  }
+
+  footer .connect h3 {
+    font-size: 24px;
+  }
+  footer .connect .icons a {
+    font-size: 16px;
+    padding: 8px;
+  }
+  footer .columns .column-sp,
+  footer .columns .column {
+    align-items: flex-start; /* Align text to left in footer columns */
+    text-align: left;
+  }
+  footer .columns .column-sp .form {
+    align-items: flex-start;
+  }
+  footer .columns .column-sp .form input {
+    width: 100%;
+  }
+  footer .columns .column-sp .form a {
+    width: auto;
+    margin-bottom: 5px;
+  }
+  footer .copy {
+    justify-content: flex-start; /* Align copyright to left */
+  }
+}
